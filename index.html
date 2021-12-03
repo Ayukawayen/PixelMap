@@ -1,0 +1,43 @@
+<html>
+	<head> 
+		<title>Bitmap</title> 
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" href="icon.bmp" />
+		<link rel="stylesheet" type="text/css" href="style.css" />
+	</head>
+	<body>
+		<div id="map">
+			<canvas id="mask"></canvas>
+			<div id="pointer" class="dot"></div>
+		</div>
+		<div id="panel">
+			<div id="colorMenu">
+				<div id="selectedColor"></div>
+				<ul id="colorList"></ul>
+			</div>
+			<div id="pixelData" isUpdating="0">
+				<div class="coord"></div>
+				<div class="current item">
+					<span class="color"></span>
+					<input type="text" class="owner" readonly="readonly" />
+				</div>
+				<div class="cost">&nbsp;</div>
+				<div class="next item">
+					<span class="color"></span>
+					<input type="text" class="owner" readonly="readonly" />
+				</div>
+			</div>
+			<div id="send">
+				<p>Expected Cost: <span id="expectedCost">0</span></p>
+				<p title="Pay 200% in case of state changes. An overpayment will be refund.">Suggested Cost: <span id="suggestedCost">0</span></p>
+				<button id="submit">Submit</button>
+			</div>
+		</div>
+	</body>
+
+	<script src="https://cdn.ethers.io/lib/ethers-5.1.umd.min.js"></script>
+	<script src="lib/contractAbi.js"></script>
+	<script src="lib/adapter.js"></script>
+	<script src="script.js"></script>
+</html>

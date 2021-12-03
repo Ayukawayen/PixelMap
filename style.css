@@ -1,0 +1,137 @@
+* {
+	margin:0;
+	padding:0;
+	
+	vertical-align:top;
+}
+
+html {
+	background-color:#fff;
+	color:#333;
+}
+body {
+	padding:1rem;
+}
+
+#map {
+	display:inline-block;
+	position:relative;
+	
+	margin:1rem;
+	
+	border:ridge #fff 0.5em;
+}
+
+#panel {
+	display:inline-block;
+	
+	width:12rem;
+	margin:1rem;
+}
+
+#mask {
+	position:absolute;
+	
+	width:100%;
+	height:100%;
+	
+	background-size:100% 100%;
+	image-rendering:pixelated;
+}
+
+.dot {
+	width:1em;
+	height:1em;
+}
+
+#pointer {
+	position:absolute;
+	
+	border-width:0.25em;
+	transform:translate(-0.25em, -0.25em);
+	
+	border-radius:0.25em;
+	border-style:double;
+	
+	opacity:0.75;
+}
+
+
+#colorMenu{
+	display:inline-block;
+}
+
+#selectedColor {
+	display:inline-block;
+	width:2em;
+	height:2em;
+	
+	border: solid 1px #404040;
+}
+#colorList {
+	display:inline-block;
+	width:8em;
+	height:2em;
+	
+	border: solid 1px #404040;
+}
+
+#colorList >li {
+	display:inline-block;
+	width:1em;
+	height:1em;
+}
+
+#pixelData {
+	display:inline-block;
+	
+	margin:1rem 0;
+	
+	border:1px solid #666;
+}
+
+#pixelData >.coord {
+	padding:0.25em;
+	
+	background-color:#666;
+	color:#fff;
+}
+#pixelData >.item {
+	padding:0.25em;
+}
+#pixelData >.cost {
+	padding:0.25em;
+	
+	text-align:center;
+}
+
+
+#pixelData >.item >.color {
+	display:inline-block;
+	
+	width:1em;
+	height:1em;
+	
+	vertical-align:middle;
+}
+#pixelData >.item >.owner {
+	vertical-align:middle;
+	
+	width:10rem;
+}
+
+#pixelData[isUpdating="0"] {
+	
+}
+
+#pixelData[isUpdating="0"] >.next {
+	opacity:0;
+}
+
+#send >p {
+	margin:0.5em 0;
+}
+#send #submit {
+	padding:0.5em;
+}
+
