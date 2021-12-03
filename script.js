@@ -23,25 +23,27 @@ let pixels;
 let updatings;
 let expectedCost = 0n;
 
-adapter.getMap(mapId).then((response)=>{
-	if(!response) return;
-	
-	map = response;
-	
-	updateSize(map.width, map.height);
-	updatings = [];
-	for(let x=0;x<map.width;++x) {
-		updatings[x] = [];
-		for(let y=0;y<map.height;++y) {
-			updatings[x][y] = null;
+function onAdapterLoad() {
+	adapter.getMap(mapId).then((response)=>{
+		if(!response) return;
+		
+		map = response;
+		
+		updateSize(map.width, map.height);
+		updatings = [];
+		for(let x=0;x<map.width;++x) {
+			updatings[x] = [];
+			for(let y=0;y<map.height;++y) {
+				updatings[x][y] = null;
+			}
 		}
-	}
-	
-	maskNode.style.backgroundImage = `url("${map.image}")`;
-});
-adapter.listPixels(mapId).then((response)=>{
-	pixels = response;
-});
+		
+		maskNode.style.backgroundImage = `url("${map.image}")`;
+	});
+	adapter.listPixels(mapId).then((response)=>{
+		pixels = response;
+	});
+}
 
 function updateSize(width, height) {
 	w = width;
@@ -93,7 +95,7 @@ function onCoordChange() {
 	
 	if(updating) {
 		pixelDataNode.querySelector('.next .color').style.backgroundColor = colors[updating.value];
-		pixelDataNode.querySelector('.next .owner').value = adapter.accounts[0];
+		pixelDataNode.querySelector('.next .owner').value = 'You';
 	} else {
 		pixelDataNode.querySelector('.next .color').style.backgroundColor = 'transparent';
 		pixelDataNode.querySelector('.next .owner').value = '';
@@ -155,5 +157,6 @@ document.querySelector('#submit').addEventListener('click', (ev)=>{
 			packed += x.toString(16).padStart(4,'0') + y.toString(16).padStart(4,'0') + '0' + updatings[x][y].value.toString(16);
 		}
 	}
+	
 	adapter.putPixels(mapId, packed, expectedCost*2n);
 });
