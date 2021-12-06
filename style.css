@@ -131,7 +131,8 @@ body {
 #send >p {
 	margin:0.5em 0;
 }
-#send #submit {
+#send >button {
 	padding:0.5em;
+	margin:0 1em 0 0;
 }
 

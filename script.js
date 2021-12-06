@@ -181,3 +181,15 @@ document.querySelector('#submit').addEventListener('click', (ev)=>{
 	
 	adapter.putPixels(mapId, packed, expectedCost*2n);
 });
+document.querySelector('#reset').addEventListener('click', (ev)=>{
+	ctx.clearRect(0, 0, w*dotSize, h*dotSize);
+	for(let x=0;x<w;++x) {
+		for(let y=0;y<h;++y) {
+			updatings[x][y] = null;
+		}
+	}
+	
+	expectedCost = 0n;
+	document.querySelector('#expectedCost').textContent = expectedCost.toString() + ' NanoETH';
+	document.querySelector('#suggestedCost').textContent = (expectedCost*2n).toString() + ' NanoETH';
+});
