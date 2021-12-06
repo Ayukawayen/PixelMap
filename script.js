@@ -114,27 +114,30 @@ function onCoordChange() {
 }
 
 function paint(button) {
+	let x = mx;
+	let y = (h-my-1);
+	
 	if(button==0) {
 		ctx.fillStyle = colors[selectedColorIndex];
-		ctx.fillRect(mx*dotSize, my*dotSize, dotSize, dotSize);
+		ctx.fillRect(x*dotSize, (h-y-1)*dotSize, dotSize, dotSize);
 		
-		if(updatings[cx][cy]) {
-			expectedCost -= updatings[cx][cy].costInNEth;
+		if(updatings[x][y]) {
+			expectedCost -= updatings[x][y].costInNEth;
 		}
-		expectedCost += pixels[cx][cy].costInNEth;
+		expectedCost += pixels[x][y].costInNEth;
 		
-		updatings[cx][cy] = {
+		updatings[x][y] = {
 			value: selectedColorIndex,
-			costInNEth: pixels[cx][cy].costInNEth,
+			costInNEth: pixels[x][y].costInNEth,
 		};
 	} else if(button==2) {
-		ctx.clearRect(mx*dotSize, my*dotSize, dotSize, dotSize);
+		ctx.clearRect(x*dotSize, (h-y-1)*dotSize, dotSize, dotSize);
 		
-		if(updatings[cx][cy]) {
-			expectedCost -= updatings[cx][cy].costInNEth;
+		if(updatings[x][y]) {
+			expectedCost -= updatings[x][y].costInNEth;
 		}
 		
-		updatings[cx][cy] = null;
+		updatings[x][y] = null;
 	}
 	
 	document.querySelector('#expectedCost').textContent = expectedCost.toString() + ' NanoETH';
