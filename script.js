@@ -63,7 +63,9 @@ let my = 0;
 let cx;
 let cy;
 
-
+mapNode.addEventListener('contextmenu', (ev)=>{
+	ev.preventDefault();
+});
 maskNode.addEventListener('mousemove', (ev)=>{
 	if(ev.srcElement != maskNode) return;
 	
@@ -73,9 +75,18 @@ maskNode.addEventListener('mousemove', (ev)=>{
 	my = Math.floor(ev.offsetY / dotSize);
 	if(my >= h) my = h-1;
 	if(my < 0) my = 0;
-	
+
+	if(ev.buttons == 1) {
+		paint(0);
+	} else if(ev.buttons == 2) {
+		paint(2);
+	}
 	onCoordChange();
 });
+pointerNode.addEventListener('mousedown', (ev)=>{
+	paint(ev.button);
+});
+
 function onCoordChange() {
 	pointerNode.style.transform = `translate(${mx-0.25}em, ${my-0.25}em)`;
 	
@@ -102,25 +113,35 @@ function onCoordChange() {
 	}
 }
 
-pointerNode.addEventListener('click', (ev)=>{
-	ctx.fillStyle = colors[selectedColorIndex];
-	ctx.fillRect(mx*dotSize, my*dotSize, dotSize, dotSize);
-	
-	if(updatings[cx][cy]) {
-		expectedCost -= updatings[cx][cy].costInNEth;
+function paint(button) {
+	if(button==0) {
+		ctx.fillStyle = colors[selectedColorIndex];
+		ctx.fillRect(mx*dotSize, my*dotSize, dotSize, dotSize);
+		
+		if(updatings[cx][cy]) {
+			expectedCost -= updatings[cx][cy].costInNEth;
+		}
+		expectedCost += pixels[cx][cy].costInNEth;
+		
+		updatings[cx][cy] = {
+			value: selectedColorIndex,
+			costInNEth: pixels[cx][cy].costInNEth,
+		};
+	} else if(button==2) {
+		ctx.clearRect(mx*dotSize, my*dotSize, dotSize, dotSize);
+		
+		if(updatings[cx][cy]) {
+			expectedCost -= updatings[cx][cy].costInNEth;
+		}
+		
+		updatings[cx][cy] = null;
 	}
-	expectedCost += pixels[cx][cy].costInNEth;
-	
-	updatings[cx][cy] = {
-		value: selectedColorIndex,
-		costInNEth: pixels[cx][cy].costInNEth,
-	};
 	
 	document.querySelector('#expectedCost').textContent = expectedCost.toString() + ' NanoETH';
 	document.querySelector('#suggestedCost').textContent = (expectedCost*2n).toString() + ' NanoETH';
 	
 	onCoordChange();
-});
+};
 
 
 
