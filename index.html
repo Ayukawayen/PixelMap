@@ -29,18 +29,18 @@
 				</div>
 			</div>
 			<div id="send">
-				<h3>Pay with</h3>
+				<div>Pay with</div>
 				<p title="If cost is higher than expected due to state change then the updates will not be applied and the payment will be refund.">
 					<input type="radio" name="payment" value="expected" />
 					Expected cost: <span id="expectedCost">0 NanoETH</span>
 				</p>
 				<p title="Pay 200% in case of state changes. The overpayment will be refund.">
 					<input type="radio" name="payment" value="suggested" checked="checked"/>
-					Suggested value: <span id="suggestedCost">0 NanoETH</span>
+					Suggested cost: <span id="suggestedCost">0 NanoETH</span>
 				</p>
 				<p>
 					<input type="radio" name="payment" value="custom" />
-					Custom value: <span><input type="number" id="custom" /> NanoETH</span>
+					Custom cost: <span><input type="number" id="custom" /> NanoETH</span>
 				</p>
 				<button id="submit">Submit</button>
 				<button id="reset">Reset</button>
