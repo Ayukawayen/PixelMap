@@ -171,7 +171,7 @@ colors.forEach((item, i)=>{
 });
 
 
-document.querySelector('#submit').addEventListener('click', (ev)=>{
+document.querySelector('#submit').addEventListener('click', async (ev)=>{
 	let packed = '0x';
 	
 	for(let x=0;x<w;++x) {
@@ -181,8 +181,23 @@ document.querySelector('#submit').addEventListener('click', (ev)=>{
 			packed += x.toString(16).padStart(4,'0') + y.toString(16).padStart(4,'0') + '0' + updatings[x][y].value.toString(16);
 		}
 	}
+	let checked = document.querySelector('input[name="payment"]:checked').value;
 	
-	adapter.putPixels(mapId, packed, expectedCost*2n);
+	let cost;
+	if(checked == 'expected') {
+		cost = expectedCost;
+	} else if(checked == 'custom') {
+		cost = BigInt(parseInt(document.querySelector('#custom').value) || 0);
+	} else {
+		cost = expectedCost*2n;
+	}
+	
+	try {
+		await adapter.putPixels(mapId, packed, cost);
+	} catch(err) {
+		console.error(err);
+		alert(err);
+	}
 });
 document.querySelector('#reset').addEventListener('click', (ev)=>{
 	ctx.clearRect(0, 0, w*dotSize, h*dotSize);
@@ -193,6 +208,6 @@ document.querySelector('#reset').addEventListener('click', (ev)=>{
 	}
 	
 	expectedCost = 0n;
-	document.querySelector('#expectedCost').textContent = expectedCost.toString() + ' NanoETH';
-	document.querySelector('#suggestedCost').textContent = (expectedCost*2n).toString() + ' NanoETH';
+	document.querySelector('#expectedCost').textContent = '0 NanoETH';
+	document.querySelector('#suggestedCost').textContent = '0 NanoETH';
 });

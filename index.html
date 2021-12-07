@@ -29,8 +29,19 @@
 				</div>
 			</div>
 			<div id="send">
-				<p>Expected Cost: <span id="expectedCost">0</span></p>
-				<p title="Pay 200% in case of state changes. An overpayment will be refund.">Suggested Cost: <span id="suggestedCost">0</span></p>
+				<h3>Pay with</h3>
+				<p title="If cost is higher than expected due to state change then the updates will not be applied and the payment will be refund.">
+					<input type="radio" name="payment" value="expected" />
+					Expected cost: <span id="expectedCost">0 NanoETH</span>
+				</p>
+				<p title="Pay 200% in case of state changes. The overpayment will be refund.">
+					<input type="radio" name="payment" value="suggested" checked="checked"/>
+					Suggested value: <span id="suggestedCost">0 NanoETH</span>
+				</p>
+				<p>
+					<input type="radio" name="payment" value="custom" />
+					Custom value: <span><input type="number" id="custom" /> NanoETH</span>
+				</p>
 				<button id="submit">Submit</button>
 				<button id="reset">Reset</button>
 			</div>
@@ -39,6 +50,6 @@
 
 	<script src="https://cdn.ethers.io/lib/ethers-5.1.umd.min.js"></script>
 	<script src="lib/contractAbi.js"></script>
-	<script src="lib/adapter.js?12061324"></script>
-	<script src="script.js?12061359"></script>
+	<script src="lib/adapter.js?12071425"></script>
+	<script src="script.js?12071425"></script>
 </html>

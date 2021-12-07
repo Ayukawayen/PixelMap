@@ -136,3 +136,12 @@ body {
 	margin:0 1em 0 0;
 }
 
+#send >p >span {
+	display:inline-block;
+}
+
+#send #custom {
+	width:4.5em;
+	
+	text-align:right;
+}
