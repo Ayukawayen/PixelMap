@@ -23,7 +23,8 @@ let pixels;
 let updatings;
 let expectedCost = 0n;
 
-function onAdapterLoad() {
+function onAdapterLoad(tokenId) {
+	mapId = tokenId || 0;
 	adapter.getMap(mapId).then((response)=>{
 		if(!response) return;
 		
